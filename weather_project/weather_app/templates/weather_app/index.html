@@ -6,28 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        .form-container input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="city1" placeholder="Enter city 1">
-  <input type="text" name="city2" placeholder="Enter city 2">
-  <button type="submit">Compare Weather</button>
-</form>
-
-<div class="comparison-container">
-  {% if weather_data1 %}
-    <div class="city-container">
-      {% include 'weather_app/city_weather.html' with weather_data=weather_data1 daily_forecasts=daily_forecasts1 %}
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="city1" placeholder="Enter city 1">
+            <br>
+            <input type="text" name="city2" placeholder="Enter city 2">
+            <br>
+            <button type="submit">Compare Weather</button>
+        </form>
     </div>
-  {% endif %}
-  {% if weather_data2 %}
-    <div class="city-container">
-      {% include 'weather_app/city_weather.html' with weather_data=weather_data2 daily_forecasts=daily_forecasts2 %}
-    </div>
-  {% endif %}
-</div>
-
 </body>
 </html>
